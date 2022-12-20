@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class BreadAlgorithm {
+    static String prompt = "Get b-ready! Do you want to 1: make bread now, 2: you already started, or 3: plan a time for bread to be ready later?";
 
     //Main Method
     public static void main(String[] args) {
@@ -21,7 +22,8 @@ public class BreadAlgorithm {
         
         //ask user if they want to make bread now or have bread ready by a certain time
 
-        System.out.println("Get b-ready! Do you want to 1: make bread now, 2: you already started, or 3: plan a time for bread to be ready later?");
+       
+        System.out.println(prompt);
         System.out.println("Note that this calculator is intended for Alex's Bakery recipes only.");
         System.out.println("1: Bread Now, 2: Bread Later, 3: Bread WIP");
         String breadOption = timeRead.nextLine();
@@ -63,7 +65,7 @@ public class BreadAlgorithm {
           }
         }
 
-    private void focacciaRecipeForwards(String formattedTime) {
+    public static void focacciaRecipeForwards(String formattedTime) {
         System.out.println("Happy you're in a flour-y mood. Here's an outline of the process.");
 
         //mix ingredients
@@ -122,7 +124,7 @@ public class BreadAlgorithm {
 
         System.out.println("Make sure to rest it until " + restTime);
     }
-    private String calculateMinutes (String input, long mins){
+    private static String calculateMinutes (String input, long mins){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
 
         LocalTime LT = LocalTime.parse(input, formatter).plusMinutes(mins);
@@ -130,6 +132,10 @@ public class BreadAlgorithm {
 
         return mainTime;
 
+    }
+
+    public static String getString() {
+        return prompt;
     }
     
 }
