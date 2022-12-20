@@ -16,14 +16,26 @@ public class BreadAlgorithmGUI {
     public static void main(String[] args) {
         
         BreadAlgorithm obj = new BreadAlgorithm();
-        // create a new frame
+        // base frame
         JFrame frame = new JFrame("Bread Algorithm");
-        JFrame frame1 = new JFrame("Option 1");
-        JFrame frame2 = new JFrame("Option 2");
-        JFrame frame3 = new JFrame("Option 3");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
         frame.setLayout(new FlowLayout());
+
+        JFrame frame1 = new JFrame("Option 1");
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.setSize(1000, 1000);
+        frame1.setLayout(new FlowLayout());
+
+        JFrame frame2 = new JFrame("Option 2");
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setSize(1000, 1000);
+        frame2.setLayout(new FlowLayout());
+
+        JFrame frame3 = new JFrame("Option 3");
+        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame3.setSize(1000, 1000);
+        frame3.setLayout(new FlowLayout());
 
         // create a label
         JLabel label = new JLabel(prompt);
@@ -54,8 +66,19 @@ public class BreadAlgorithmGUI {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
                 String formattedTime = time.format(formatter);
 
+                frame.dispose();
+                
+
                 // call focacciaRecipeForwards method
-                BreadAlgorithm.focacciaRecipeForwards(formattedTime);
+                String out = BreadAlgorithm.focacciaRecipeForwards(formattedTime);
+                JLabel label1 = new JLabel(out);
+                
+                frame1.add(label1);
+
+
+
+
+                frame1.setVisible(true);
             }
         });
 
@@ -68,9 +91,28 @@ public class BreadAlgorithmGUI {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
                 String formattedTime = time.format(formatter);
 
+                frame.dispose();
+                frame2.setVisible(true);
+
                 // call focacciaRecipeForwards method
                 BreadAlgorithm.focacciaRecipeForwards(formattedTime);
             }
+        });
+        button3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // get time from text field
+                    String input = timeField.getText();
+                    LocalTime time = LocalTime.parse(input);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+                    String formattedTime = time.format(formatter);
+    
+                    frame.dispose();
+                    frame3.setVisible(true);
+    
+                    // call focacciaRecipeForwards method
+                    BreadAlgorithm.focacciaRecipeForwards(formattedTime);
+                }
         });
 
         frame.setVisible(true);
