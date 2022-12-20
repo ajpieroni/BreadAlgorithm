@@ -10,8 +10,6 @@ public class BreadAlgorithm {
     public static void main(String[] args) {
         BreadAlgorithm test = new BreadAlgorithm();
         test.scanBread();
-
-        
     }
 
     //Bread Scanner
