@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -104,19 +103,30 @@ public class BreadAlgorithmGUI {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // get time from text field
-                String input = timeField.getText();
-                LocalTime time = LocalTime.parse(input);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-                String formattedTime = time.format(formatter);
-
+                JLabel promptLabel = new JLabel("Enter the time you started (hh:mm a): ");
+                JTextField timeField = new JTextField(10);
+                
+                
+                JPanel timePanel = new JPanel(new FlowLayout());
+                timePanel.add(promptLabel);
+                timePanel.add(timeField);
+                
                 frame.dispose();
+                frame2.add(timePanel);
                 frame2.setVisible(true);
-
-                // call focacciaRecipeForwards method
+                frame2.toFront();
+        
+                String timeString = timeField.getText();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+                LocalTime time = LocalTime.parse(timeString, formatter);
+        
+                // Format the time using the formatter and pass it to the focacciaRecipeForwards method
+                String formattedTime = time.format(formatter);
                 BreadAlgorithm.focacciaRecipeForwards(formattedTime);
             }
         });
+        
+        
         button3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
