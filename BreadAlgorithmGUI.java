@@ -1,6 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,10 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class BreadAlgorithmGUI {
-    static String prompt = "Get b-ready!\nDo you want to make bread now, you already started, or plan a time for bread to be ready later?";
+    static String prompt = "<html> Get b-ready! Do you want to make bread now, you already started, or plan a time for bread to be ready later? <br> </html>";
 
     public static void main(String[] args) {
         
@@ -19,26 +21,27 @@ public class BreadAlgorithmGUI {
         // base frame
         JFrame frame = new JFrame("Bread Algorithm");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
+        frame.setSize(800, 500);
         frame.setLayout(new FlowLayout());
 
-        JFrame frame1 = new JFrame("Option 1");
+        JFrame frame1 = new JFrame("Let's make bread now!");
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame1.setSize(1000, 1000);
+        frame1.setSize(600, 500);
         frame1.setLayout(new FlowLayout());
 
         JFrame frame2 = new JFrame("Option 2");
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame2.setSize(1000, 1000);
+        frame2.setSize(800, 500);
         frame2.setLayout(new FlowLayout());
 
         JFrame frame3 = new JFrame("Option 3");
         frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame3.setSize(1000, 1000);
+        frame3.setSize(800, 500);
         frame3.setLayout(new FlowLayout());
 
         // create a label
         JLabel label = new JLabel(prompt);
+        label.setHorizontalAlignment(JLabel.CENTER);
 
         // create a text field
         JTextField timeField = new JTextField(20);
@@ -50,12 +53,18 @@ public class BreadAlgorithmGUI {
         JButton button3 = new JButton("Bread WIP");
 
         // add components to frame
-        frame.add(label);
-        //frame.add(timeField);
+        frame.setLayout(new BorderLayout());
+        
 
-        frame.add(button1);
-        frame.add(button2);
-        frame.add(button3);
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(button3);
+
+        frame.add(label, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        //frame.add(timeField);
 
         // add action listeners to buttons
         button1.addActionListener(new ActionListener() {
@@ -67,16 +76,26 @@ public class BreadAlgorithmGUI {
                 String formattedTime = time.format(formatter);
 
                 frame.dispose();
-                
 
                 // call focacciaRecipeForwards method
                 String out = BreadAlgorithm.focacciaRecipeForwards(formattedTime);
-                JLabel label1 = new JLabel(out);
-                
-                frame1.add(label1);
 
+                //print output
+                JLabel currentTime = new JLabel("The current time is: "+ formattedTime);
+                currentTime.setHorizontalAlignment(JLabel.CENTER);
+                JLabel times = new JLabel(out);
 
+                frame.setLayout(new BorderLayout());
+        
 
+                JPanel upperPanel = new JPanel(new FlowLayout());
+                JPanel lowerPanel = new JPanel(new FlowLayout());
+
+                upperPanel.add(currentTime);
+                lowerPanel.add(times);
+
+                frame1.add(upperPanel,BorderLayout.NORTH);
+                frame1.add(lowerPanel, BorderLayout.SOUTH);
 
                 frame1.setVisible(true);
             }
