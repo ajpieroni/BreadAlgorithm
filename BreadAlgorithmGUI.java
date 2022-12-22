@@ -65,6 +65,14 @@ public class BreadAlgorithmGUI {
         frame.add(buttonPanel, BorderLayout.SOUTH);
         //frame.add(timeField);
 
+        //back button
+        JButton backButton = new JButton("Back");
+        
+        frame1.add(backButton, BorderLayout.SOUTH);
+        frame2.add(backButton, BorderLayout.SOUTH);
+        frame3.add(backButton, BorderLayout.SOUTH);
+        
+
         // add action listeners to buttons
         button1.addActionListener(new ActionListener() {
             @Override
@@ -125,8 +133,6 @@ public class BreadAlgorithmGUI {
                 BreadAlgorithm.focacciaRecipeForwards(formattedTime);
             }
         });
-        
-        
         button3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -143,7 +149,16 @@ public class BreadAlgorithmGUI {
                     BreadAlgorithm.focacciaRecipeForwards(formattedTime);
                 }
         });
-
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // code to execute when the button is clicked
+                frame1.dispose();
+                frame.setVisible(true);
+            }
+        });
+        
         frame.setVisible(true);
     }
+    
 }
